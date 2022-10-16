@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<body class="bg-success">
+
+    <div class="col-8 offset-2 my-5">
+        <div class="card">
+            <div class="card-body">
+                <h5>Wildberries Costs</h5>
+                <hr>
+                <div>
+                    <canvas id="wbCosts"></canvas>
+                    <hr>
+                    <button class="btn btn-success" id="line">Line Chart</button>
+                    <button class="btn btn-info" id="bar">Bar Chart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+
+    <script>
+        const line = document.getElementById('line');
+        const bar = document.getElementById('bar');
+
+        line.addEventListener('click', changeLine);
+        bar.addEventListener('click', changeBar);
+
+        const labels = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June'
+        ];
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Amount of orders including discounts',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [355943, 289196, 207448, 348775, 284575, 404080],
+            }, {
+                label: 'Amount of payments including commissions',
+                backgroundColor: 'rgb(255, 127, 80)',
+                borderColor: 'rgb(255, 127, 80)',
+                data: [314261, 245964, 180865, 287824, 234108, 366482],
+
+            }, {
+                label: 'Gross profit',
+                backgroundColor: 'rgb(60, 179, 113)',
+                borderColor: 'rgb(60, 179, 113)',
+                data: [31046, 56727, 78810, 90639, 48394, 60723],
+
+            }]
+        };
+
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {}
+        };
+
+        function changeLine() {
+            const updateType = 'line';
+            myChart.config.type = updateType;
+            myChart.update();
+            //console.log(myChart.config.type)
+        };
+
+        function changeBar() {
+            const updateType = 'bar';
+            myChart.config.type = updateType;
+            myChart.update();
+            //console.log(myChart.config.type)
+        };
+    </script>
+
+    <script>
+        const myChart = new Chart(
+            document.getElementById('wbCosts'),
+            config
+        );
+    </script>
+
+</body>
+
+</html>
